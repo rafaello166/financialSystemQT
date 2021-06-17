@@ -1,23 +1,23 @@
 #include "login.h"
 #include "ui_login.h"
 #include <QMessageBox>
-#include <register.h>
+#include "register.h"
 
 
 
-financialSystem::financialSystem(QWidget *parent)
+login::login(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::financialSystem)
+    , ui(new Ui::login)
 {
     ui->setupUi(this);
 }
 
-financialSystem::~financialSystem()
+login::~login()
 {
     delete ui;
 }
 
-void financialSystem::on_pushButton_login_clicked()
+void login::on_pushButton_login_clicked()
 {
     QString username = ui->lineEdit_user->text();
     QString password = ui->lineEdit_password->text();
@@ -38,7 +38,7 @@ void financialSystem::on_pushButton_login_clicked()
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("localhost");
-    db.setDatabaseName("financialsystem");
+    db.setDatabaseName("login");
     db.setUserName("root");
     db.setPassword("");
 
@@ -55,13 +55,13 @@ void financialSystem::on_pushButton_login_clicked()
 
 }
 
-void financialSystem::keyPressEvent(QKeyEvent *event) {
+void login::keyPressEvent(QKeyEvent *event) {
     if((event->key() == Qt::Key_Enter) || (event->key() == Qt::Key_Return)) {
         on_pushButton_login_clicked();
     }
 }
 
-void financialSystem::on_pushButton_register_clicked()
+void login::on_pushButton_register_clicked()
 {
     Register *registerPage = new Register;
     registerPage->show();

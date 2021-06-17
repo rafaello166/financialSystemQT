@@ -16,7 +16,7 @@ Register::~Register()
 
 void Register::on_pushButton_register_clicked()
 {
-    financialSystem *loginPage = new financialSystem;
+    login *loginPage = new login;
     loginPage->show();
     hide();
 }

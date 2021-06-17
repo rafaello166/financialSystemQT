@@ -8,16 +8,16 @@
 #include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class financialSystem; }
+namespace Ui { class login; }
 QT_END_NAMESPACE
 
-class financialSystem : public QMainWindow
+class login : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    financialSystem(QWidget *parent = nullptr);
-    ~financialSystem();
+    login(QWidget *parent = nullptr);
+    ~login();
 
 private slots:
 
@@ -26,7 +26,7 @@ private slots:
     void on_pushButton_register_clicked();
 
 private:
-    Ui::financialSystem *ui;
+    Ui::login *ui;
     void keyPressEvent(QKeyEvent * );
     QMainWindow *mainWindow;
 

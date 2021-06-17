@@ -159,31 +159,6 @@ QLineEdit {
       <string>Register</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_password_2">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>320</y>
-       <width>361</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="inputMask">
-      <string/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-     <property name="placeholderText">
-      <string>Re-type Password</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QToolButton" name="toolButton">
     <property name="geometry">
@@ -221,6 +196,8 @@ QLineEdit {
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="Images/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
