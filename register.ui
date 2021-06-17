@@ -39,6 +39,11 @@ QPushButton {
 	border-radius: 25px;
 }
 
+QPushButton:hover {
+	background: green;
+	color: red;
+}
+
 QToolButton {
 	background: red;
 	border-radius: 25px;
@@ -51,9 +56,11 @@ QLineEdit {
 	border-bottom: 1px solid #717072;
 }
 
-#pushButton_register {
+#pushButton_login {
 	background: #b30000;
-}</string>
+}
+
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="loginFrame">
@@ -88,13 +95,13 @@ QLineEdit {
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>430</y>
+       <y>490</y>
        <width>271</width>
        <height>51</height>
       </rect>
      </property>
      <property name="text">
-      <string>Log In</string>
+      <string>Login</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_user">
@@ -145,7 +152,7 @@ QLineEdit {
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>490</y>
+       <y>430</y>
        <width>271</width>
        <height>51</height>
       </rect>

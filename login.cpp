@@ -1,4 +1,4 @@
-#include "login.h"
+    #include "login.h"
 #include "ui_login.h"
 #include <QMessageBox>
 #include "register.h"
@@ -51,7 +51,6 @@ void login::on_pushButton_login_clicked()
     else {
         QMessageBox::warning(this, "Connection", "not ok");
     }
-
 
 }
 

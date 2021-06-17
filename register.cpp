@@ -14,7 +14,7 @@ Register::~Register()
     delete ui;
 }
 
-void Register::on_pushButton_register_clicked()
+void Register::on_pushButton_login_clicked()
 {
     login *loginPage = new login;
     loginPage->show();
