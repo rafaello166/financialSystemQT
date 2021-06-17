@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="nowyPrzedrostek">
+    <file>user.png</file>
+    <file>mountains.jpg</file>
+  </qresource>
+</RCC>
