@@ -229,7 +229,7 @@ QLineEdit {
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../graphics/user.png</normaloff>../graphics/user.png</iconset>
+      <normaloff>Images/user.png</normaloff>Images/user.png</iconset>
     </property>
     <property name="iconSize">
      <size>
