@@ -1,13 +1,13 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
-#include <QMainWindow>
+#include <QWidget>
 
 namespace Ui {
 class Register;
 }
 
-class Register : public QMainWindow
+class Register : public QWidget
 {
     Q_OBJECT
 
@@ -16,8 +16,7 @@ public:
     ~Register();
 
 private slots:
-
-    void on_pushButton_login_clicked();
+    void on_pushButton_register_clicked();
 
 private:
     Ui::Register *ui;

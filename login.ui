@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>login</class>
- <widget class="QMainWindow" name="login">
+ <widget class="QWidget" name="login">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>776</width>
-    <height>695</height>
+    <height>697</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
 	color: white;
 }
 
-#login {
+#centralwidget {
 	background: url(:/nowyPrzedrostek/mountains.jpg);
 }
 
@@ -60,7 +60,54 @@ QLineEdit {
 		background: #b30000;
 }</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="centralwidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>0</y>
+     <width>791</width>
+     <height>641</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#loginLabel {
+	font-size: 32px;
+	color: white;
+}
+
+#centralwidget {
+	background: url(:/nowyPrzedrostek/mountains.jpg);
+}
+
+#loginFrame {
+	background: rgba(0,0,0,0.8);
+	border-radius: 15px;
+}
+
+QPushButton {
+	color :white;
+	background: red;
+	border-radius: 25px;
+}
+
+QPushButton:hover {
+	background: green;
+	color: red;
+}
+
+QToolButton {
+	background: red;
+	border-radius: 25px;
+}
+
+QLineEdit {
+	background: transparent;
+	border: none;
+	color: #717072;
+	border-bottom: 1px solid #717072;
+}
+</string>
+   </property>
    <widget class="QFrame" name="loginFrame">
     <property name="geometry">
      <rect>
@@ -99,7 +146,7 @@ QLineEdit {
       </rect>
      </property>
      <property name="text">
-      <string>Login</string>
+      <string>Log In</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_user">
@@ -194,8 +241,19 @@ QLineEdit {
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>3</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Images/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

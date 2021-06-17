@@ -1,12 +1,14 @@
-    #include "login.h"
+#include "login.h"
 #include "ui_login.h"
 #include <QMessageBox>
 #include "register.h"
+#include "databaseconnection.h"
+
 
 
 
 login::login(QWidget *parent)
-    : QMainWindow(parent)
+    : QWidget(parent)
     , ui(new Ui::login)
 {
     ui->setupUi(this);
@@ -24,9 +26,9 @@ void login::on_pushButton_login_clicked()
 
     if(username == "test" && password == "pass") {
         QMessageBox::information(this, "Login", "Logged in successfully!");
+        MainWindow *profilePage = new MainWindow;
+        profilePage->show();
         hide();
-        mainWindow = new QMainWindow(this);
-        mainWindow->show();
     }
     else {
         QMessageBox::warning(this, "Login", "Username or password is not correct.");
@@ -36,21 +38,27 @@ void login::on_pushButton_login_clicked()
     }
 
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setDatabaseName("login");
-    db.setUserName("root");
-    db.setPassword("");
+//    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+//    db.setHostName("localhost");
+//    db.setDatabaseName("login");
+//    db.setUserName("root");
+//    db.setPassword("");
 
 
-    if(db.open()) {
-        QMessageBox::information(this, "Connection", "ok");
+//    if(db.open()) {
+//        QMessageBox::information(this, "Connection", "ok");
 
 
-    }
-    else {
-        QMessageBox::warning(this, "Connection", "not ok");
-    }
+//    }
+//    else {
+//        QMessageBox::warning(this, "Connection", "not ok");
+//    }
+
+
+    databaseConnection* bt = new databaseConnection();
+    bt->createUser("ola", "mm", "olamm", "123");
+//    bt->isUsernameArleadyTalen("macwiec");
+
 
 }
 

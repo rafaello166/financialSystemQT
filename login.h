@@ -6,12 +6,16 @@
 #include <QSqlDatabase>
 #include <QMessageBox>
 #include <QKeyEvent>
+#include <mainwindow.h>
+#include <QWidget>
+#include <QtWidgets>
+#include <QStackedWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class login; }
 QT_END_NAMESPACE
 
-class login : public QMainWindow
+class login : public QWidget
 {
     Q_OBJECT
 
@@ -28,7 +32,8 @@ private slots:
 private:
     Ui::login *ui;
     void keyPressEvent(QKeyEvent * );
-    QMainWindow *mainWindow;
+    QWidget *mainWindow;
+    MainWindow* Profile;
 
 };
 #endif // LOGIN_H
