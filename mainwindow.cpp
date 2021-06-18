@@ -23,14 +23,14 @@ MainWindow::MainWindow(QWidget *parent) :
     balanceLabel->setText({sqlAmountString});
 
     amountIncome = ui->spinBox_2;
-    amountExpenses = ui->spinBox;
     amountIncome->setRange(0, 10000);
-    amountExpenses->setRange(0, 10000);
-
     categoryIncome = ui->lineEdit_2;
-    categoryExpenses = ui->lineEdit_3;
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->setColumnWidth(0, this->width()/8);
+    ui->tableWidget->setColumnWidth(1, this->width()/3);
+    ui->tableWidget->setColumnWidth(2, this->width()/8);
 }
 
 MainWindow::~MainWindow()
@@ -55,9 +55,9 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    QString category = categoryExpenses->text();
-    QString amount = amountExpenses->cleanText();
-    int money = amountExpenses->value();
+    QString category = categoryIncome->text();
+    QString amount = amountIncome->cleanText();
+    int money = amountIncome->value();
     sqlAmount -= money;
     QString amountString = QString::number(sqlAmount);
     balanceLabel->setText({amountString});
@@ -65,6 +65,7 @@ void MainWindow::on_pushButton_2_clicked()
     tableWidget->setItem(tableWidget->rowCount()-1, 0, new QTableWidgetItem("Expenses"));
     tableWidget->setItem(tableWidget->rowCount()-1, 1, new QTableWidgetItem({category}));
     tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem({amount}));
+    tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
 }
 
 

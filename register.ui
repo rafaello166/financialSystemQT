@@ -31,11 +31,6 @@
 	font-size: 24px;
 }
 
-#loginLabel {
-	font-size: 32px;
-	color: white;
-}
-
 #widget {
 	background: rgba(0,0,0,0.8);
 }
@@ -45,11 +40,6 @@
 	border-radius: 15px;
 }
 
-QPushButton {
-	color :white;
-	background: red;
-	border-radius: 25px;
-}
 
 QToolButton {
 	background: red;
@@ -82,10 +72,6 @@ QLineEdit {
 	font-size: 24px;
 }
 
-#loginLabel {
-	font-size: 32px;
-	color: white;
-}
 
 #stackedWidget {
 background: url(:/nowyPrzedrostek/mountains.jpg);
@@ -98,13 +84,22 @@ background: url(:/nowyPrzedrostek/mountains.jpg);
 	border-radius: 15px;
 }
 
-QPushButton {
-	color :white;
+QToolButton {
 	background: red;
 	border-radius: 25px;
 }
 
-QToolButton {
+QLineEdit {
+	background: transparent;
+	border: none;
+	color: #717072;
+	border-bottom: 1px solid #717072;
+}</string>
+   </property>
+   <widget class="QWidget" name="page1">
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	color :white;
 	background: red;
 	border-radius: 25px;
 }
@@ -114,19 +109,16 @@ QPushButton:hover {
 	color: red;
 }
 
-QLineEdit {
-	background: transparent;
-	border: none;
-	color: #717072;
-	border-bottom: 1px solid #717072;
+#loginLabel {
+	font-size: 32px;
+	color: white;
 }
 
 #pushButton_login {
 	background: none;
 	font-size: 15px;
 }</string>
-   </property>
-   <widget class="QWidget" name="page1">
+    </property>
     <widget class="QFrame" name="loginFrame">
      <property name="geometry">
       <rect>
@@ -159,7 +151,7 @@ QLineEdit {
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>230</y>
+        <y>180</y>
         <width>361</width>
         <height>51</height>
        </rect>
@@ -178,7 +170,7 @@ QLineEdit {
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>290</y>
+        <y>240</y>
         <width>361</width>
         <height>51</height>
        </rect>
@@ -203,7 +195,7 @@ QLineEdit {
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>430</y>
+        <y>420</y>
         <width>271</width>
         <height>51</height>
        </rect>
@@ -216,7 +208,7 @@ QLineEdit {
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>100</y>
+        <y>120</y>
         <width>361</width>
         <height>51</height>
        </rect>
@@ -231,30 +223,11 @@ QLineEdit {
        <string>First Name</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_lase_name">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>160</y>
-        <width>361</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="inputMask">
-       <string/>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="placeholderText">
-       <string>Last Name</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="lineEdit_password_2">
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>350</y>
+        <y>300</y>
         <width>361</width>
         <height>51</height>
        </rect>
@@ -276,7 +249,7 @@ QLineEdit {
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>490</y>
+        <y>480</y>
         <width>271</width>
         <height>51</height>
        </rect>

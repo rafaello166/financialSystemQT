@@ -31,7 +31,20 @@
 	font-size: 12px;
 }
 
-QPushButton {
+</string>
+  </property>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>620</width>
+     <height>560</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="page1" native="true">
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
 	color :white;
 	background: red;
 	border-radius: 25px;
@@ -41,58 +54,14 @@ QPushButton:hover {
 	background: wihte;
 	color: red;
 }</string>
-  </property>
-  <widget class="QStackedWidget" name="stackedWidget">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>615</width>
-     <height>559</height>
-    </rect>
-   </property>
-   <widget class="QWidget" name="page1" native="true">
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>280</y>
-       <width>367</width>
-       <height>192</height>
-      </rect>
-     </property>
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="gridStyle">
-      <enum>Qt::SolidLine</enum>
-     </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
-     <column>
-      <property name="text">
-       <string>I/E</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Category</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Amount</string>
-      </property>
-     </column>
-    </widget>
+    </property>
     <widget class="QFrame" name="frame">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>100</y>
-       <width>401</width>
-       <height>161</height>
+       <x>55</x>
+       <y>130</y>
+       <width>500</width>
+       <height>400</height>
       </rect>
      </property>
      <property name="frameShape">
@@ -101,50 +70,24 @@ QPushButton:hover {
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <widget class="QLabel" name="label_9">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>80</y>
-        <width>81</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Category:</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="pushButton_2">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>120</y>
-        <width>111</width>
-        <height>21</height>
+        <x>260</x>
+        <y>100</y>
+        <width>120</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>Add Expenses</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>10</y>
-        <width>61</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Income</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="lineEdit_2">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>80</y>
+        <x>130</x>
+        <y>100</y>
         <width>113</width>
         <height>21</height>
        </rect>
@@ -153,34 +96,21 @@ QPushButton:hover {
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>120</y>
-        <width>111</width>
-        <height>21</height>
+        <x>260</x>
+        <y>60</y>
+        <width>120</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>Add Income</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_8">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>40</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Amount:</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>40</y>
+        <x>70</x>
+        <y>60</y>
         <width>47</width>
         <height>13</height>
        </rect>
@@ -192,8 +122,8 @@ QPushButton:hover {
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>80</y>
+        <x>70</x>
+        <y>100</y>
         <width>81</width>
         <height>16</height>
        </rect>
@@ -202,56 +132,109 @@ QPushButton:hover {
        <string>Category:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_3">
+     <widget class="QSpinBox" name="spinBox_2">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>80</y>
-        <width>113</width>
-        <height>21</height>
+        <x>130</x>
+        <y>60</y>
+        <width>111</width>
+        <height>22</height>
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label_7">
+     <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>10</y>
-        <width>61</width>
+        <x>10</x>
+        <y>150</y>
+        <width>481</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="gridStyle">
+       <enum>Qt::SolidLine</enum>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>I/E</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Category</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Amount</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>360</y>
+        <width>90</width>
         <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>Expenses</string>
+       <string>DELETE ROW</string>
       </property>
      </widget>
-     <widget class="QSpinBox" name="spinBox">
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>360</y>
+        <width>90</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CLEAR</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_6">
       <property name="geometry">
        <rect>
         <x>270</x>
-        <y>40</y>
-        <width>111</width>
-        <height>22</height>
+        <y>360</y>
+        <width>90</width>
+        <height>20</height>
        </rect>
       </property>
+      <property name="text">
+       <string>PIE CHART</string>
+      </property>
      </widget>
-     <widget class="QSpinBox" name="spinBox_2">
+     <widget class="QPushButton" name="pushButton_3">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>40</y>
-        <width>111</width>
-        <height>22</height>
+        <x>400</x>
+        <y>360</y>
+        <width>90</width>
+        <height>20</height>
        </rect>
+      </property>
+      <property name="text">
+       <string>LOGOUT</string>
       </property>
      </widget>
     </widget>
     <widget class="QFrame" name="frame_2">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>10</y>
-       <width>401</width>
+       <x>55</x>
+       <y>15</y>
+       <width>500</width>
        <height>80</height>
       </rect>
      </property>
@@ -264,7 +247,7 @@ QPushButton:hover {
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>160</x>
         <y>20</y>
         <width>251</width>
         <height>16</height>
@@ -277,7 +260,7 @@ QPushButton:hover {
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>160</x>
         <y>40</y>
         <width>151</width>
         <height>16</height>
@@ -287,45 +270,6 @@ QPushButton:hover {
        <string>Your balance is: {balance}</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QPushButton" name="pushButton_3">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>500</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>LOGOUT</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_4">
-     <property name="geometry">
-      <rect>
-       <x>510</x>
-       <y>290</y>
-       <width>91</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>DELETE ROW</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_5">
-     <property name="geometry">
-      <rect>
-       <x>510</x>
-       <y>320</y>
-       <width>91</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>CLEAR</string>
-     </property>
     </widget>
    </widget>
   </widget>
