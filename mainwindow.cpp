@@ -29,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     categoryIncome = ui->lineEdit_2;
     categoryExpenses = ui->lineEdit_3;
+
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 }
 
 MainWindow::~MainWindow()
@@ -71,5 +73,44 @@ void MainWindow::on_pushButton_3_clicked()
     login *loginPage = new login;
     hide();
     loginPage->show();
+}
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    int count = ui->tableWidget->rowCount();
+    if (count > 0) {
+        int row = ui->tableWidget->currentRow();
+        QString category = ui->tableWidget->item(row, 0)->text();
+        QString amountS = ui->tableWidget->item(row, 2)->text();
+        int amount = amountS.split(" ")[0].toInt();
+        if (category == "Income") {
+            sqlAmount -= amount;
+        }
+        else if (category == "Expenses") {
+            sqlAmount += amount;
+        }
+        QString amountString = QString::number(sqlAmount);
+        balanceLabel->setText({amountString});
+        ui->tableWidget->removeRow(row);
+    }
+    else {
+        QMessageBox::critical(this, "Error", "There are no entries left");
+    }
+}
+
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    int count = ui->tableWidget->rowCount();
+    if (count > 0) {
+        sqlAmount=0;
+        QString amountString = QString::number(sqlAmount);
+        balanceLabel->setText({amountString});
+        ui->tableWidget->setRowCount(0);
+    }
+    else {
+        QMessageBox::critical(this, "Error", "There are no entries left");
+    }
 }
 

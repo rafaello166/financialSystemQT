@@ -75,6 +75,5 @@ void login::on_pushButton_register_clicked()
 
 void login::moveLogin()
 {
-    qInfo() << "WORKING";
     ui->centralstackedWidget->setCurrentIndex(0);
 }
