@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     balanceLabel->setText({sqlAmountString});
 
     amountIncome = ui->spinBox_2;
-    amountIncome->setRange(0, 10000);
+    amountIncome->setRange(1, 10000);
     categoryIncome = ui->lineEdit_2;
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);

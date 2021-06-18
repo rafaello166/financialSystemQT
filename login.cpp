@@ -55,8 +55,8 @@ void login::on_pushButton_login_clicked()
 //    }
 
 
-    databaseConnection* bt = new databaseConnection();
-    bt->createUser("ola", "mm", "olamm", "123");
+//    databaseConnection* bt = new databaseConnection();
+//    bt->createUser("ola", "mm", "olamm", "123");
 //    bt->isUsernameArleadyTalen("macwiec");
 
 
