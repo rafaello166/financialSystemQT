@@ -16,9 +16,9 @@
 #include <QStackedWidget>
 #include <QPixmap>
 
-namespace Ui {
-class MainWindow;
-}
+QT_BEGIN_NAMESPACE
+namespace Ui {class MainWindow;}
+QT_END_NAMESPACE
 
 class MainWindow : public QWidget
 {
@@ -33,8 +33,11 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QWidget *mainWindow;
     QTableWidget* tableWidget;
     QLabel* welcomeLabel;
     QLabel* balanceLabel;

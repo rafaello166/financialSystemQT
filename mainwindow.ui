@@ -10,6 +10,18 @@
     <height>559</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>615</width>
+    <height>559</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>615</width>
+    <height>559</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -26,20 +38,8 @@ QPushButton {
 }
 
 QPushButton:hover {
-	background: green;
+	background: wihte;
 	color: red;
-}
-
-QToolButton {
-	background: red;
-	border-radius: 25px;
-}
-
-QLineEdit {
-	background: transparent;
-	border: none;
-	color: #717072;
-	border-bottom: 1px solid #717072;
 }</string>
   </property>
   <widget class="QStackedWidget" name="stackedWidget">
@@ -47,8 +47,8 @@ QLineEdit {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>621</width>
-     <height>482</height>
+     <width>615</width>
+     <height>559</height>
     </rect>
    </property>
    <widget class="QWidget" name="page1" native="true">
@@ -278,6 +278,19 @@ QLineEdit {
        <string>Your balance is: {balance}</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>500</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LOGOUT</string>
+     </property>
     </widget>
    </widget>
   </widget>

@@ -10,6 +10,7 @@ login::login(QWidget *parent)
     ui->centralstackedWidget->insertWidget(1, &Register);
 //    ui->centralstackedWidget->insertWidget(2, &Profile);
     connect(&Register, SIGNAL(loginClicked()), this, SLOT(moveLogin()));
+//    connect(&Profile, SIGNAL(logoutClicked()), this, SLOT(jumpLogin()));
 }
 
 login::~login()
@@ -26,8 +27,8 @@ void login::on_pushButton_login_clicked()
         QMessageBox::information(this, "Login", "Logged in successfully!");
 //        ui->centralstackedWidget->setCurrentIndex(2);
                 MainWindow *profilePage = new MainWindow;
-                profilePage->show();
                 hide();
+                profilePage->show();;
     }
     else {
         QMessageBox::warning(this, "Login", "Username or password is not correct.");
@@ -74,5 +75,6 @@ void login::on_pushButton_register_clicked()
 
 void login::moveLogin()
 {
+    qInfo() << "WORKING";
     ui->centralstackedWidget->setCurrentIndex(0);
 }

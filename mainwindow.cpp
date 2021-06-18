@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "login.h"
 
 int sqlAmount = 0;
 QString sqlAmountString = QString::number(sqlAmount);
@@ -62,5 +63,13 @@ void MainWindow::on_pushButton_2_clicked()
     tableWidget->setItem(tableWidget->rowCount()-1, 0, new QTableWidgetItem("Expenses"));
     tableWidget->setItem(tableWidget->rowCount()-1, 1, new QTableWidgetItem({category}));
     tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem({amount}));
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    login *loginPage = new login;
+    hide();
+    loginPage->show();
 }
 

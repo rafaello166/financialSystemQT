@@ -41,8 +41,7 @@ signals:
 private:
     Ui::Register *ui;
 //    void keyPressEvent(QKeyEvent * );
-//    MainWindow Profile;
-//    login login;
+    MainWindow Profile;
 };
 
 #endif // REGISTER_H
