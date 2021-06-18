@@ -15,18 +15,21 @@ SOURCES += \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
+    piechart.cpp \
     register.cpp
 
 HEADERS += \
     databaseconnection.h \
     login.h \
     mainwindow.h \
+    piechart.h \
     register.h
     mainwindow.h
 
 FORMS += \
     login.ui \
     mainwindow.ui \
+    piechart.ui \
     register.ui
 
 TRANSLATIONS += \

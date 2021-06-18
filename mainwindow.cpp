@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "login.h"
+#include "piechart.h"
 
 int sqlAmount = 0;
 QString sqlAmountString = QString::number(sqlAmount);
@@ -71,9 +72,13 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    login *loginPage = new login;
-    hide();
-    loginPage->show();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Logout", "Are you sure you want to logout?", QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes) {
+        login *loginPage = new login;
+        hide();
+        loginPage->show();
+    }
 }
 
 
@@ -104,14 +109,26 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     int count = ui->tableWidget->rowCount();
-    if (count > 0) {
-        sqlAmount=0;
-        QString amountString = QString::number(sqlAmount);
-        balanceLabel->setText({amountString});
-        ui->tableWidget->setRowCount(0);
-    }
-    else {
+    if (count < 1) {
         QMessageBox::critical(this, "Error", "There are no entries left");
     }
+    if (count > 0) {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "WARNING", "Are you sure you want to clear all entries?", QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            sqlAmount=0;
+            QString amountString = QString::number(sqlAmount);
+            balanceLabel->setText({amountString});
+            ui->tableWidget->setRowCount(0);
+        }
+    }
+}
+
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    PieChart piechart;
+    piechart.setModal(true);
+    piechart.exec();
 }
 
