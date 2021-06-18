@@ -1,9 +1,8 @@
 #include "register.h"
 #include "ui_register.h"
-#include "login.h"
 
 Register::Register(QWidget *parent) :
-    QMainWindow(parent),
+    QWidget(parent),
     ui(new Ui::Register)
 {
     ui->setupUi(this);
@@ -16,8 +15,13 @@ Register::~Register()
 
 void Register::on_pushButton_register_clicked()
 {
-    login *loginPage = new login;
-    loginPage->show();
+    MainWindow *profilePage = new MainWindow;
+    profilePage->show();
     hide();
+}
+
+void Register::on_pushButton_login_clicked()
+{
+    emit loginClicked();
 }
 

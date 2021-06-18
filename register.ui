@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Register</class>
- <widget class="QMainWindow" name="Register">
+ <widget class="QWidget" name="Register">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>776</width>
-    <height>695</height>
+    <height>697</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,8 +24,8 @@
 	color: white;
 }
 
-#financialSystem {
-	background: url(:/nowyPrzedrostek/mountains.jpg);
+#widget {
+	background: rgba(0,0,0,0.8);
 }
 
 #loginFrame {
@@ -55,201 +55,253 @@ QLineEdit {
 	background: #b30000;
 }</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="loginFrame">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>60</y>
-      <width>451</width>
-      <height>571</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="loginLabel">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>20</y>
-       <width>231</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Finance System</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_login">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>430</y>
-       <width>271</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Log In</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_user">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>230</y>
-       <width>361</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="inputMask">
-      <string/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="placeholderText">
-      <string>Username</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_password">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>290</y>
-       <width>361</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="inputMask">
-      <string/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-     <property name="placeholderText">
-      <string>Password</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_register">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>490</y>
-       <width>271</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Register</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_name">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>100</y>
-       <width>361</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="inputMask">
-      <string/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="placeholderText">
-      <string>First Name</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_lase_name">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>160</y>
-       <width>361</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="inputMask">
-      <string/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="placeholderText">
-      <string>Last Name</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_password_2">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>350</y>
-       <width>361</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="inputMask">
-      <string/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-     <property name="placeholderText">
-      <string>Re-type Password</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QToolButton" name="toolButton">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>10</y>
-      <width>131</width>
-      <height>121</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>Images/user.png</normaloff>Images/user.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>64</width>
-      <height>64</height>
-     </size>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>776</width>
-     <height>33</height>
+     <width>811</width>
+     <height>701</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">* {
+	font-family: arial;
+	font-size: 24px;
+}
+
+#loginLabel {
+	font-size: 32px;
+	color: white;
+}
+
+#stackedWidget {
+background: url(:/nowyPrzedrostek/mountains.jpg);
+
+}
+
+#loginFrame {
+
+	background: rgba(0,0,0,0.8);
+	border-radius: 15px;
+}
+
+QPushButton {
+	color :white;
+	background: red;
+	border-radius: 25px;
+}
+
+QToolButton {
+	background: red;
+	border-radius: 25px;
+}
+
+QPushButton:hover {
+	background: white;
+	color: red;
+}
+
+QLineEdit {
+	background: transparent;
+	border: none;
+	color: #717072;
+	border-bottom: 1px solid #717072;
+}
+
+#pushButton_login {
+	background: none;
+	font-size: 15px;
+}</string>
+   </property>
+   <widget class="QWidget" name="page1">
+    <widget class="QFrame" name="loginFrame">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>60</y>
+       <width>451</width>
+       <height>571</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="loginLabel">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>20</y>
+        <width>231</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Finance System</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_user">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>230</y>
+        <width>361</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>Username</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_password">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>290</y>
+        <width>361</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string>Password</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_register">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>430</y>
+        <width>271</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Register</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_name">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>100</y>
+        <width>361</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>First Name</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_lase_name">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>160</y>
+        <width>361</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>Last Name</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_password_2">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>350</y>
+        <width>361</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string>Re-type Password</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_login">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>490</y>
+        <width>271</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Already have an account? Sign in!</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QToolButton" name="toolButton">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>40</y>
+       <width>131</width>
+       <height>121</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: url(:/nowyPrzedrostek/user.png);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>nowyPrzedrostek/user.png</normaloff>nowyPrzedrostek/user.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>64</width>
+       <height>64</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
