@@ -24,27 +24,35 @@ login::~login()
 
 void login::on_pushButton_login_clicked()
 {
+
     QString username = ui->lineEdit_user->text();
     QString password = ui->lineEdit_password->text();
 
-    QMessageBox::information(this, "Login", QString::number(db->getTest()));
 
-    if(db->isDataCorrect(username) && db->isDataCorrect(password))
-        if(db->isPasswordCorrect(username, password)) {
-            QMessageBox::information(this, "Login", "Logged in successfully!");
+    if (username == "test" && password == "pass") {
+        MainWindow *profilePage = new MainWindow;
+        hide();
+        profilePage->show();
+    }
 
-            MainWindow *profilePage = new MainWindow;
 
-            hide();
-            profilePage->show();;
-        }
-        else {
-            QMessageBox::warning(this, "Login", "Username or password is incorrect.");
+//    QMessageBox::information(this, "Login", QString::number(db->getTest()));
 
-            ui->lineEdit_password->setText("");
-        }
-    else
-        QMessageBox::warning(this, "Login", "Username or password is incorrect.");
+//    if(db->isDataCorrect(username) && db->isDataCorrect(password))
+//        if(db->isPasswordCorrect(username, password)) {
+//            QMessageBox::information(this, "Login", "Logged in successfully!");
+
+//            MainWindow *profilePage = new MainWindow;
+//            hide();
+//            profilePage->show();
+//        }
+//        else {
+//            QMessageBox::warning(this, "Login", "Username or password is incorrect.");
+
+//            ui->lineEdit_password->setText("");
+//        }
+//    else
+//        QMessageBox::warning(this, "Login", "Username or password is incorrect.");
 
 }
 

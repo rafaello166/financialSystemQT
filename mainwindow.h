@@ -15,6 +15,8 @@
 #include <QSpinBox>
 #include <QStackedWidget>
 #include <QPixmap>
+#include <QMap>
+#include <QVector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {class MainWindow;}

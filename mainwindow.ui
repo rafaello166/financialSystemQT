@@ -42,7 +42,7 @@
      <height>560</height>
     </rect>
    </property>
-   <widget class="QWidget" name="page1" native="true">
+   <widget class="QWidget" name="page1">
     <property name="styleSheet">
      <string notr="true">QPushButton {
 	color :white;
@@ -73,7 +73,7 @@ QPushButton:hover {
      <widget class="QPushButton" name="pushButton_2">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>310</x>
         <y>100</y>
         <width>120</width>
         <height>20</height>
@@ -88,15 +88,15 @@ QPushButton:hover {
        <rect>
         <x>130</x>
         <y>100</y>
-        <width>113</width>
-        <height>21</height>
+        <width>120</width>
+        <height>20</height>
        </rect>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>310</x>
         <y>60</y>
         <width>120</width>
         <height>20</height>
@@ -112,7 +112,7 @@ QPushButton:hover {
         <x>70</x>
         <y>60</y>
         <width>47</width>
-        <height>13</height>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
@@ -124,7 +124,7 @@ QPushButton:hover {
        <rect>
         <x>70</x>
         <y>100</y>
-        <width>81</width>
+        <width>51</width>
         <height>16</height>
        </rect>
       </property>
@@ -137,7 +137,7 @@ QPushButton:hover {
        <rect>
         <x>130</x>
         <y>60</y>
-        <width>111</width>
+        <width>120</width>
         <height>22</height>
        </rect>
       </property>
