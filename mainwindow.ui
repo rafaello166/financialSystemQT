@@ -167,7 +167,7 @@ border-bottom: 1px solid #717072;
        <string>Category:</string>
       </property>
      </widget>
-     <widget class="QSpinBox" name="spinBox_2">
+     <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -187,6 +187,9 @@ border-bottom: 1px solid #717072;
       </property>
       <property name="frame">
        <bool>true</bool>
+      </property>
+      <property name="suffix">
+       <string/>
       </property>
      </widget>
      <widget class="QTableWidget" name="tableWidget">

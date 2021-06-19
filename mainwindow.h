@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QSpinBox>
+#include <QDoubleSpinBox>
 #include <QStackedWidget>
 #include <QPixmap>
 #include <QMap>
@@ -49,8 +50,8 @@ private:
     QTableWidget* tableWidget;
     QLabel* welcomeLabel;
     QLabel* balanceLabel;
-    QSpinBox* amountIncome;
-    QSpinBox* amountExpenses;
+    QDoubleSpinBox* amountIncome;
+    QDoubleSpinBox* amountExpenses;
     QLineEdit* categoryExpenses;
     QLineEdit* categoryIncome;
 };

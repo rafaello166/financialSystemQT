@@ -288,6 +288,15 @@ QPushButton:hover {
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>lineEdit_user</tabstop>
+  <tabstop>lineEdit_password</tabstop>
+  <tabstop>lineEdit_password_2</tabstop>
+  <tabstop>pushButton_register</tabstop>
+  <tabstop>pushButton_login</tabstop>
+  <tabstop>toolButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

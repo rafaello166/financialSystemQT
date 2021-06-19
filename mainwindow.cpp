@@ -6,14 +6,14 @@
 #include "piechart.h"
 #include "ui_piechart.h"
 
-int sqlAmount = 0;
-int sqlExpenses = 0;
+double sqlAmount = 0;
+double sqlExpenses = 0;
 
 class sqlTableModel {
 public:
     QString ie;
     QString category;
-    int amount;
+    double amount;
 };
 
 sqlTableModel model;
@@ -39,8 +39,9 @@ MainWindow::MainWindow(QWidget *parent) :
     balanceLabel = ui->label;
     balanceLabel->setText(sqlBalanceString);
 
-    amountIncome = ui->spinBox_2;
-    amountIncome->setRange(1, 10000);
+    amountIncome = ui->doubleSpinBox_2;
+    amountIncome->setRange(0, 10000);
+    amountIncome->setSuffix(" zł");
     categoryIncome = ui->lineEdit_2;
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
@@ -58,9 +59,9 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     QString category = categoryIncome->text();
-    if (category != "") {
-        QString amount = amountIncome->cleanText();
-        int money = amountIncome->value();
+    double money = amountIncome->value();
+    if (category != "" && money != 0) {
+        QString amount = amountIncome->cleanText() + " zł";
         sqlAmount += money;
         QString amountString = QString::number(sqlAmount);
         QString balanceString = QString("Your balance is: %1").arg(amountString);
@@ -76,8 +77,11 @@ void MainWindow::on_pushButton_clicked()
         model.amount = money;
         sqlTable.push_back(model);
     }
-    else {
+    else if (category == "") {
         QMessageBox::critical(this, "Error", "Category can't be blank");
+    }
+    else if (money == 0) {
+        QMessageBox::critical(this, "Error", "Amount can't be equal to 0");
     }
 
 }
@@ -86,10 +90,10 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     QString category = categoryIncome->text();
-    if (category != "") {
+    double money = amountIncome->value();
+    if (category != "" && money != 0) {
+        QString amount = amountIncome->cleanText() + " zł";
 
-        QString amount = amountIncome->cleanText();
-        int money = amountIncome->value();
         sqlAmount -= money;
         sqlExpenses += money;
         QString amountString = QString::number(sqlAmount);
@@ -106,8 +110,11 @@ void MainWindow::on_pushButton_2_clicked()
         model.amount = money;
         sqlTable.push_back(model);
     }
-    else {
+    else if (category == "") {
         QMessageBox::critical(this, "Error", "Category can't be blank");
+    }
+    else if (money == 0) {
+        QMessageBox::critical(this, "Error", "Amount can't be equal to 0");
     }
 }
 
@@ -131,13 +138,20 @@ void MainWindow::on_pushButton_4_clicked()
         int row = ui->tableWidget->currentRow();
         QString category = ui->tableWidget->item(row, 0)->text();
         QString amountS = ui->tableWidget->item(row, 2)->text();
-        int amount = amountS.split(" ")[0].toInt();
-        if (category == "Income") {
-            sqlAmount -= amount;
+        int index = amountS.indexOf(',');
+        double amount = amountS.split(" ")[0].replace(index, 1, '.').toDouble();
+        if (count > 1) {
+            if (category == "Income") {
+                sqlAmount -= amount;
+            }
+            else if (category == "Expenses") {
+                sqlAmount += amount;
+                sqlExpenses -= amount;
+            }
         }
-        else if (category == "Expenses") {
-            sqlAmount += amount;
-            sqlExpenses -= amount;
+        if (count == 1) {
+            sqlAmount = 0;
+            sqlExpenses = 0;
         }
         QString amountString = QString::number(sqlAmount);
         QString balanceString = QString("Your balance is: %1").arg(amountString);
@@ -190,7 +204,7 @@ PieChart::PieChart(QWidget *parent) :
                 int j = 0;
                 while (true) {
                     if (series->slices().at(j)->label() == sqlTable[i].category) {
-                        int newVal = series->slices().at(j)->value() + sqlTable[i].amount;
+                        double newVal = series->slices().at(j)->value() + sqlTable[i].amount;
                         series->slices().at(j)->setValue(newVal);
                         qInfo() << "Slice value: " << series->slices().at(j)->value();
                         break;
