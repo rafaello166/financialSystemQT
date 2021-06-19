@@ -97,3 +97,30 @@ int databaseConnection::getTest() {
     return test;
 }
 
+QVector<sqlTableModel> databaseConnection::getIncomeExpensesData(QString username) {
+    QSqlQuery *query = new QSqlQuery(db);
+
+    int i = 0;
+    int query_size;
+    if( query->exec("SELECT income_expenses, category, amount FROM expenses WHERE username='"+username+"' ") ) {
+        query_size = query->size();
+        QVector<sqlTableModel> data;
+
+        while( query->next() ) {
+
+            sqlTableModel model;
+            model.ie = query->value(0).toString();
+            model.category = query->value(1).toString();
+            model.amount = query->value(2).toDouble();
+            data.push_back(model);
+
+            i++;
+        }
+
+//        return data[query_size][3];
+        return data;
+    }
+
+//    return "";
+}
+

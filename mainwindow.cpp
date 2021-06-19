@@ -9,13 +9,6 @@
 double sqlAmount = 0;
 double sqlExpenses = 0;
 
-class sqlTableModel {
-public:
-    QString ie;
-    QString category;
-    double amount;
-};
-
 sqlTableModel model;
 QVector<sqlTableModel> sqlTable;
 
