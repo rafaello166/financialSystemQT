@@ -1,3 +1,6 @@
+// Wiencis, Rojek, Ochorok - 19.06 - System finansów
+// Kod stworzony podczas tworzenia aplikacji desktopowej w środowisku QT
+
 #include "login.h"
 
 #include <QApplication>

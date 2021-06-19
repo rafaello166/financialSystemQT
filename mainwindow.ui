@@ -6,48 +6,72 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>615</width>
-    <height>559</height>
+    <width>791</width>
+    <height>680</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>615</width>
-    <height>559</height>
+    <width>791</width>
+    <height>680</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>615</width>
-    <height>559</height>
+    <width>791</width>
+    <height>680</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">* {
-	font-family: arial;
-	font-size: 12px;
-}
-
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>620</width>
-     <height>560</height>
+     <width>791</width>
+     <height>680</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>791</width>
+     <height>680</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>791</width>
+     <height>680</height>
+    </size>
    </property>
    <property name="styleSheet">
     <string notr="true"/>
    </property>
    <widget class="QWidget" name="page1">
+    <property name="minimumSize">
+     <size>
+      <width>791</width>
+      <height>680</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>791</width>
+      <height>680</height>
+     </size>
+    </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {
+     <string notr="true">* {
+	font-family: arial;
+	font-size: 12px;
+}
+
+QPushButton {
 	color :white;
 	background: red;
 	border-radius: 25px;
@@ -55,7 +79,7 @@
 }
 
 QPushButton:hover {
-	background: wihte;
+	background: white;
 	color: red;
 }
 
@@ -87,8 +111,8 @@ border-bottom: 1px solid #717072;
     <widget class="QFrame" name="frame">
      <property name="geometry">
       <rect>
-       <x>55</x>
-       <y>130</y>
+       <x>145</x>
+       <y>190</y>
        <width>500</width>
        <height>400</height>
       </rect>
@@ -285,8 +309,8 @@ border-bottom: 1px solid #717072;
     <widget class="QFrame" name="frame_2">
      <property name="geometry">
       <rect>
-       <x>55</x>
-       <y>15</y>
+       <x>145</x>
+       <y>50</y>
        <width>500</width>
        <height>80</height>
       </rect>
@@ -327,6 +351,17 @@ border-bottom: 1px solid #717072;
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>doubleSpinBox_2</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>tableWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -1,3 +1,5 @@
+# Plik automatycznie uzupełniany przez środowisko QT, jedynie dodaliśmy tu sql oraz charts
+
 QT       += core gui
 QT       += sql
 QT       += charts
@@ -15,7 +17,6 @@ SOURCES += \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
-    piechart.cpp \
     register.cpp
 
 HEADERS += \

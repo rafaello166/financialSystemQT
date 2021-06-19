@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+// mainwindow to klasa która wyświetla nam stronę profilu
+
 #include <QMainWindow>
 #include <QWidget>
 #include <QtSql>
@@ -31,6 +33,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    // Poniżej znajdują się funkcje przypisane odpowiedniemu przyciskowi/sloty
+
 private slots:
     void on_pushButton_clicked();
 
@@ -43,6 +47,9 @@ private slots:
     void on_pushButton_5_clicked();
 
     void on_pushButton_6_clicked();
+
+
+    // Musimy zainicjować odpowiednie widgety które chcemy później zmieniać za pomocą kodu
 
 private:
     Ui::MainWindow *ui;

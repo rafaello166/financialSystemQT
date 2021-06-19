@@ -1,6 +1,8 @@
 #ifndef PIECHART_H
 #define PIECHART_H
 
+// piechart to klasa która wyświetla nam wykres w kształcie 'ciasta'
+
 #include <QDialog>
 #include <QtCharts>
 #include <QChartView>

@@ -63,8 +63,20 @@ QLineEdit {
      <x>0</x>
      <y>-10</y>
      <width>791</width>
-     <height>701</height>
+     <height>700</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>791</width>
+     <height>700</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>791</width>
+     <height>700</height>
+    </size>
    </property>
    <property name="styleSheet">
     <string notr="true">#loginLabel {
@@ -96,7 +108,34 @@ QLineEdit {
    </property>
    <widget class="QWidget" name="page1">
     <property name="styleSheet">
-     <string notr="true">QPushButton {
+     <string notr="true">* {
+	font-family: arial;
+	font-size: 24px;
+}
+
+#loginLabel {
+	font-size: 32px;
+	color: white;
+}
+
+#loginFrame {
+	background: rgba(0,0,0,0.8);
+	border-radius: 15px;
+}
+
+QToolButton {
+	background: red;
+	border-radius: 25px;
+}
+
+QLineEdit {
+	background: transparent;
+	border: none;
+	color: #717072;
+	border-bottom: 1px solid #717072;
+}
+
+QPushButton {
 	color :white;
 	background: red;
 	border-radius: 25px;
@@ -110,6 +149,10 @@ QPushButton:hover {
 #pushButton_register {
 	background: none;
 	font-size: 15px;
+}
+
+#page1 {
+	background: url(:/nowyPrzedrostek/mountains.jpg);
 }</string>
     </property>
     <widget class="QFrame" name="loginFrame">

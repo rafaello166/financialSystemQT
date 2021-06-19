@@ -6,42 +6,74 @@
 #include "piechart.h"
 #include "ui_piechart.h"
 
+// Zmienne pomocniczne repezentujące odpowiednio saldo oraz ilość wydatków
+
 double sqlAmount = 0;
 double sqlExpenses = 0;
 
-sqlTableModel model;
-QVector<sqlTableModel> sqlTable;
+//databaseConnection* db = new databaseConnection();
 
-QString sqlAmountString = QString::number(sqlAmount);
-QString sqlBalanceString = QString("Your balance is: %1").arg(sqlAmountString);
-QString sqlWelcomeString = "QString::number(db->getTest())";
+// Stworzenie modelu klasy dzięki której będzie mogli dodawać wpisy do naszego wektora zainicjowanego poniżej
+sqlTableModel model;
+QVector<sqlTableModel> sqlTable; // = db->getIncomeExpensesData(username);
+
+// Wiadomość powitalna na stronie profilu
+QString sqlWelcomeString = QString("Hi %1! Welcome to your profile.").arg(firstname);
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    tableWidget = ui->tableWidget;
-    tableWidget->setColumnWidth(0,100);
-    tableWidget->setColumnWidth(1,125);
-    tableWidget->setColumnWidth(2,125);
 
+    // Ustawienie wiadomości powitalnej w UI
     welcomeLabel = ui->label_2;
     welcomeLabel->setText(sqlWelcomeString);
 
-    balanceLabel = ui->label;
-    balanceLabel->setText(sqlBalanceString);
-
+    // Dodatkowa konfiguracja pól do wpisywania ilości i kategorii
     amountIncome = ui->doubleSpinBox_2;
     amountIncome->setRange(0, 10000);
     amountIncome->setSuffix(" zł");
     categoryIncome = ui->lineEdit_2;
 
-    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget->setColumnWidth(0, this->width()/8);
-    ui->tableWidget->setColumnWidth(1, this->width()/3);
-    ui->tableWidget->setColumnWidth(2, this->width()/8);
+    // Dodatkowa konfiguracja tabeli wydatków i dochodów
+    tableWidget = ui->tableWidget;
+    tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    tableWidget->horizontalHeader()->setStretchLastSection(true);
+    tableWidget->setColumnWidth(0, this->width()/8);
+    tableWidget->setColumnWidth(1, this->width()/3);
+    tableWidget->setColumnWidth(2, this->width()/8);
+
+    // testowe dane
+    for(int z = 0; z < 10; z++) {
+        model.ie = "Expenses";
+        model.category = "STATIC";
+        model.amount = 100.01;
+        sqlTable.push_back(model);
+    }
+
+    // wczytanie danych z bazy danych
+    for (int g = 0; g < sqlTable.size(); g++) {
+        QString amount = QString::number(sqlTable[g].amount) + " zł";
+        tableWidget->insertRow(tableWidget->rowCount());
+        tableWidget->setItem(tableWidget->rowCount()-1, 0, new QTableWidgetItem(sqlTable[g].ie));
+        tableWidget->setItem(tableWidget->rowCount()-1, 1, new QTableWidgetItem(sqlTable[g].category));
+        tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem(amount));
+        tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
+        if (sqlTable[g].ie == "Income") {
+            sqlAmount += sqlTable[g].amount;
+        }
+        else if (sqlTable[g].ie == "Expenses") {
+            sqlAmount -= sqlTable[g].amount;
+            sqlExpenses += sqlTable[g].amount;
+        }
+    }
+
+    // ustawienie wiadomości ukazującej saldo
+    balanceLabel = ui->label;
+    QString amountString = QString::number(sqlAmount) + " zł";
+    QString balanceString = QString("Your balance is: %1").arg(amountString);
+    balanceLabel->setText(balanceString);
 }
 
 MainWindow::~MainWindow()
@@ -49,6 +81,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// Logika klikania przycisku do dodawania dochodów
 void MainWindow::on_pushButton_clicked()
 {
     QString category = categoryIncome->text();
@@ -56,7 +89,7 @@ void MainWindow::on_pushButton_clicked()
     if (category != "" && money != 0) {
         QString amount = amountIncome->cleanText() + " zł";
         sqlAmount += money;
-        QString amountString = QString::number(sqlAmount);
+        QString amountString = QString::number(sqlAmount) + " zł";
         QString balanceString = QString("Your balance is: %1").arg(amountString);
         balanceLabel->setText(balanceString);
         tableWidget->insertRow(tableWidget->rowCount());
@@ -65,21 +98,23 @@ void MainWindow::on_pushButton_clicked()
         tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem({amount}));
         tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
 
+        // Wykorzystanie na początku stworzonego modelu do dowania wpisów do wektora (sqlTable)
         model.ie = "Income";
         model.category = category;
         model.amount = money;
         sqlTable.push_back(model);
     }
+    // Pole kategorii nie może być puste
     else if (category == "") {
         QMessageBox::critical(this, "Error", "Category can't be blank");
     }
+    // Pole wpisywanej ilości nie może być puste
     else if (money == 0) {
         QMessageBox::critical(this, "Error", "Amount can't be equal to 0");
     }
-
 }
 
-
+// Logika klikania przycisku do dodawania wydatków
 void MainWindow::on_pushButton_2_clicked()
 {
     QString category = categoryIncome->text();
@@ -89,7 +124,7 @@ void MainWindow::on_pushButton_2_clicked()
 
         sqlAmount -= money;
         sqlExpenses += money;
-        QString amountString = QString::number(sqlAmount);
+        QString amountString = QString::number(sqlAmount) + " zł";
         QString balanceString = QString("Your balance is: %1").arg(amountString);
         balanceLabel->setText(balanceString);
         tableWidget->insertRow(tableWidget->rowCount());
@@ -111,9 +146,10 @@ void MainWindow::on_pushButton_2_clicked()
     }
 }
 
-
+// Logika klikania przycisku do wylogowywania się
 void MainWindow::on_pushButton_3_clicked()
 {
+    // Wyskakujące okienko które pyta się nas czy na pewno chcemy się wylogować
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Logout", "Are you sure you want to logout?", QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes) {
@@ -123,14 +159,14 @@ void MainWindow::on_pushButton_3_clicked()
     }
 }
 
-
+// Logika klikania przycisku do odejmowania wpisów z tabeli
 void MainWindow::on_pushButton_4_clicked()
 {
-    int count = ui->tableWidget->rowCount();
+    int count = tableWidget->rowCount();
     if (count > 0) {
-        int row = ui->tableWidget->currentRow();
-        QString category = ui->tableWidget->item(row, 0)->text();
-        QString amountS = ui->tableWidget->item(row, 2)->text();
+        int row = tableWidget->currentRow();
+        QString category = tableWidget->item(row, 0)->text();
+        QString amountS = tableWidget->item(row, 2)->text();
         int index = amountS.indexOf(',');
         double amount = amountS.split(" ")[0].replace(index, 1, '.').toDouble();
         if (count > 1) {
@@ -146,74 +182,81 @@ void MainWindow::on_pushButton_4_clicked()
             sqlAmount = 0;
             sqlExpenses = 0;
         }
-        QString amountString = QString::number(sqlAmount);
+        QString amountString = QString::number(sqlAmount) + " zł";
         QString balanceString = QString("Your balance is: %1").arg(amountString);
         balanceLabel->setText(balanceString);
-        ui->tableWidget->removeRow(row);
+        tableWidget->removeRow(row);
         sqlTable.removeAt(row);
     }
+    // Jeżeli nie ma żadnych wpisów w tabeli to nie możemy nic odjąć
     else {
         QMessageBox::critical(this, "Error", "There are no entries left");
     }
 }
 
-
+// Logika klikania przycisku do dodawania dochodów
 void MainWindow::on_pushButton_5_clicked()
 {
-    int count = ui->tableWidget->rowCount();
+    int count = tableWidget->rowCount();
     if (count < 1) {
         QMessageBox::critical(this, "Error", "There are no entries left");
     }
+    // Wyskakujące okienko które pyta się nas czy na pewno chcemy wyczyścić wszystkie wpisy
     if (count > 0) {
         QMessageBox::StandardButton reply;
         reply = QMessageBox::question(this, "WARNING", "Are you sure you want to clear all entries?", QMessageBox::Yes|QMessageBox::No);
         if (reply == QMessageBox::Yes) {
             sqlAmount=0;
             sqlExpenses=0;
-            QString amountString = QString::number(sqlAmount);
+            QString amountString = QString::number(sqlAmount) + " zł";
             QString balanceString = QString("Your balance is: %1").arg(amountString);
             balanceLabel->setText(balanceString);
-            ui->tableWidget->setRowCount(0);
+            tableWidget->setRowCount(0);
             sqlTable.clear();
         }
     }
 }
 
+// Logika kryjąca się za stworzonym wykresem
 PieChart::PieChart(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PieChart)
 {
     ui->setupUi(this);
     QPieSeries *series = new QPieSeries();
+
+    // Ustawiamy nasz wykres by wyglądał jak donut
     series->setHoleSize(0.35);
 
+    // Dodajemy do naszego wykresu dane z tabeli
     for (int i = 0; i < sqlTable.size(); i++) {
         if (sqlTable[i].ie == "Expenses") {
+            // Jeżeli nie ma żadnego wpisu zapisanego na naszym wykresie to po prostu dodaje ten wpis
             if (series->count() == 0) {
                 series->append(sqlTable[i].category, sqlTable[i].amount)->setLabelVisible();
-                qInfo() << "Slice value: " << series->slices().at(0)->value();
             }
+            // Natomiast jeśli już jakieś są to sprawdza wszystkie czy nie istnieje już wpis o takiej samej kategorii
+            // Jeśli istnieje to do zapisanego już wpisu dodaje wartość tego drugie wpisu przez co ten pierwszy się powiększa
+            // Jeśli nie istnieje to po prostu dodaje nowy wpis
             else {
                 int j = 0;
                 while (true) {
                     if (series->slices().at(j)->label() == sqlTable[i].category) {
                         double newVal = series->slices().at(j)->value() + sqlTable[i].amount;
                         series->slices().at(j)->setValue(newVal);
-                        qInfo() << "Slice value: " << series->slices().at(j)->value();
                         break;
                     }
                     if (j == series->count() - 1) {
                         series->append(sqlTable[i].category, sqlTable[i].amount)->setLabelVisible();
-                        qInfo() << "Slice value: " << series->slices().at(j)->value();
                         break;
                     }
                     j++;
                 }
             }
         }
-        qInfo() << "Sum value: " << series->sum();
     }
 
+    // Dodatkowe ustawienia wykresu takie jak animacja czy motyw
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setAnimationOptions(QChart::SeriesAnimations);
@@ -230,6 +273,7 @@ PieChart::~PieChart()
     delete ui;
 }
 
+// Logika klikania przycisku do pokazania pie chartu
 void MainWindow::on_pushButton_6_clicked()
 {
     PieChart piechart;

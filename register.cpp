@@ -15,8 +15,10 @@ Register::~Register()
     delete ui;
 }
 
+// logika tworzenia konta
 void Register::on_pushButton_register_clicked()
 {
+    // z pól do wypełnienia na stronie register zostają ściągnięte dane
     QString name = ui->lineEdit_name->text();
     QString username = ui->lineEdit_user->text();
     QString password = ui->lineEdit_password->text();
@@ -41,6 +43,7 @@ void Register::on_pushButton_register_clicked()
 
 }
 
+// wysłanie sygnału do strony login
 void Register::on_pushButton_login_clicked()
 {
     emit loginClicked();
