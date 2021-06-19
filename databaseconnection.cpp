@@ -12,7 +12,6 @@ databaseConnection::databaseConnection()
     db.setPassword("");
     db.open();  //TODO: REALLY IMPORTANT
 
-
 //    if(!db.open())
 //        QMessageBox::warning(this, "Connection", "There are no connection to the database!");
 
@@ -66,8 +65,9 @@ bool databaseConnection::isPasswordCorrect(QString username, QString password) {
 
     if( query->exec("SELECT username FROM user WHERE username='"+username+"' AND password='"+password_hash+"' ") ) {
         if( query->next() ) {
-            if(query->value(0).toString() == username)
+            if(query->value(0).toString() == username) {
                 return true;
+            }
         }
     }
 
@@ -86,5 +86,14 @@ bool databaseConnection::isDataCorrect(QString field) {
             return true;
 
     return false;
+}
+
+void databaseConnection::setTest(){
+    test = test + 1;
+}
+
+int databaseConnection::getTest() {
+    setTest();
+    return test;
 }
 

@@ -3,6 +3,9 @@
 #include "databaseconnection.h"
 #include <QMessageBox>
 
+// connect to the database
+databaseConnection* db = new databaseConnection();
+
 login::login(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::login)
@@ -24,8 +27,7 @@ void login::on_pushButton_login_clicked()
     QString username = ui->lineEdit_user->text();
     QString password = ui->lineEdit_password->text();
 
-    // connect to the database
-    databaseConnection* db = new databaseConnection();
+    QMessageBox::information(this, "Login", QString::number(db->getTest()));
 
     if(db->isDataCorrect(username) && db->isDataCorrect(password))
         if(db->isPasswordCorrect(username, password)) {

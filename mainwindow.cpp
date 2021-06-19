@@ -2,10 +2,11 @@
 #include "ui_mainwindow.h"
 #include "login.h"
 #include "piechart.h"
+#include "databaseconnection.h"
 
 int sqlAmount = 0;
 QString sqlAmountString = QString::number(sqlAmount);
-QString sqlWelcomeString = "custom welcome text from sql";
+QString sqlWelcomeString = "QString::number(db->getTest())";
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
