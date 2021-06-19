@@ -1,6 +1,7 @@
 #include "login.h"
 #include "ui_login.h"
 #include "databaseconnection.h"
+#include <QMessageBox>
 
 login::login(QWidget *parent)
     : QWidget(parent)
@@ -23,42 +24,25 @@ void login::on_pushButton_login_clicked()
     QString username = ui->lineEdit_user->text();
     QString password = ui->lineEdit_password->text();
 
-    if(username == "test" && password == "pass") {
-        QMessageBox::information(this, "Login", "Logged in successfully!");
-//        ui->centralstackedWidget->setCurrentIndex(2);
-                MainWindow *profilePage = new MainWindow;
-                hide();
-                profilePage->show();;
-    }
-    else {
-        QMessageBox::warning(this, "Login", "Username or password is not correct.");
-//        ui->lineEdit_user->setText(""); //TODO: cursor doesn't move on 'login field'
-        ui->lineEdit_password->setText("");
+    // connect to the database
+    databaseConnection* db = new databaseConnection();
 
-    }
+    if(db->isDataCorrect(username) && db->isDataCorrect(password))
+        if(db->isPasswordCorrect(username, password)) {
+            QMessageBox::information(this, "Login", "Logged in successfully!");
 
+            MainWindow *profilePage = new MainWindow;
 
-//    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-//    db.setHostName("localhost");
-//    db.setDatabaseName("login");
-//    db.setUserName("root");
-//    db.setPassword("");
+            hide();
+            profilePage->show();;
+        }
+        else {
+            QMessageBox::warning(this, "Login", "Username or password is incorrect.");
 
-
-//    if(db.open()) {
-//        QMessageBox::information(this, "Connection", "ok");
-
-
-//    }
-//    else {
-//        QMessageBox::warning(this, "Connection", "not ok");
-//    }
-
-
-    databaseConnection* bt = new databaseConnection();
-    bt->createUser("ola", "mm", "olamm", "123");
-//    bt->isUsernameArleadyTalen("macwiec");
-
+            ui->lineEdit_password->setText("");
+        }
+    else
+        QMessageBox::warning(this, "Login", "Username or password is incorrect.");
 
 }
 

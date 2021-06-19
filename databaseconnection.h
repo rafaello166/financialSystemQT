@@ -9,8 +9,11 @@ class databaseConnection
 {
 public:
     databaseConnection();
-    bool createUser(QString first_name, QString last_name, QString username, QString password);
-    std::string isUsernameArleadyTalen(QString username);
+    bool createUser(QString first_name, QString username, QString password);
+    bool isUsernameArleadyTaken(QString username);
+    bool isPasswordCorrect(QString username, QString password);
+    bool isDataCorrect(QString field);
+
 private:
     QSqlDatabase db;
 };

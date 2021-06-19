@@ -1,6 +1,6 @@
 #include "databaseconnection.h"
 //#include <QMainWindow>
-//#include <QMessageBox>
+#include <QMessageBox>
 #include <iostream>
 
 databaseConnection::databaseConnection()
@@ -12,34 +12,79 @@ databaseConnection::databaseConnection()
     db.setPassword("");
     db.open();  //TODO: REALLY IMPORTANT
 
+
 //    if(!db.open())
 //        QMessageBox::warning(this, "Connection", "There are no connection to the database!");
 
 }
 
 //databaseConnection::~databaseConnection() {
-    // db disconnect
+
 //}
 
-bool databaseConnection::createUser(QString first_name, QString last_name, QString username, QString password) {
+bool databaseConnection::createUser(QString first_name, QString username, QString password) {
     QSqlQuery *query = new QSqlQuery(db);
-        query->prepare("INSERT INTO user (first_name, last_name, username, password) "
-         "VALUES (?, ?, ?, ?)");
+
+    if(!isUsernameArleadyTaken(username)) {
+        query->prepare("INSERT INTO user (first_name, username, password) "
+         "VALUES (?, ?, ?)");
+
+        QString password_hash = QString(QCryptographicHash::hash((password.toUtf8()),QCryptographicHash::Md5).toHex());
+
         query->addBindValue(first_name);
-        query->addBindValue(last_name);
         query->addBindValue(username);
-        query->addBindValue(password);
+        query->addBindValue(password_hash);
         query->exec();
+
+        return true; //The account has been created successfully
+    }
+
+    delete query;
+
+    return false;
 }
 
-std::string databaseConnection::isUsernameArleadyTalen(QString username) {
+bool databaseConnection::isUsernameArleadyTaken(QString username) {
     QSqlQuery *query = new QSqlQuery(db);
-    query->prepare("SELECT username FROM user WHERE username='"+username+"' ");
 
-//    if(query->exec( )){
-//        std::string test = query->value(0).toString();
+    if( query->exec("SELECT username FROM user WHERE username='"+username+"' ") ) {
+        if( query->next() ) {
+            if(query->value(0).toString() == username)
+                return true;
+        }
+    }
 
-//        std::cout << test;
-//    }
+    delete query;
 
+    return false;
 }
+
+bool databaseConnection::isPasswordCorrect(QString username, QString password) {
+    QSqlQuery *query = new QSqlQuery(db);
+
+    QString password_hash = QString(QCryptographicHash::hash((password.toUtf8()),QCryptographicHash::Md5).toHex());
+
+    if( query->exec("SELECT username FROM user WHERE username='"+username+"' AND password='"+password_hash+"' ") ) {
+        if( query->next() ) {
+            if(query->value(0).toString() == username)
+                return true;
+        }
+    }
+
+    delete query;
+
+    return false;
+}
+
+bool databaseConnection::isDataCorrect(QString field) {
+    field = field.simplified();
+    field.replace( " ", "" );
+    int length = field.toStdString().length();
+
+    if(field != "")
+        if(length >= 3 && length <= 12)
+            return true;
+
+    return false;
+}
+
