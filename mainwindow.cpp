@@ -58,45 +58,57 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     QString category = categoryIncome->text();
-    QString amount = amountIncome->cleanText();
-    int money = amountIncome->value();
-    sqlAmount += money;
-    QString amountString = QString::number(sqlAmount);
-    QString balanceString = QString("Your balance is: %1").arg(amountString);
-    balanceLabel->setText(balanceString);
-    tableWidget->insertRow(tableWidget->rowCount());
-    tableWidget->setItem(tableWidget->rowCount()-1, 0, new QTableWidgetItem("Income"));
-    tableWidget->setItem(tableWidget->rowCount()-1, 1, new QTableWidgetItem({category}));
-    tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem({amount}));
-    tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
+    if (category != "") {
+        QString amount = amountIncome->cleanText();
+        int money = amountIncome->value();
+        sqlAmount += money;
+        QString amountString = QString::number(sqlAmount);
+        QString balanceString = QString("Your balance is: %1").arg(amountString);
+        balanceLabel->setText(balanceString);
+        tableWidget->insertRow(tableWidget->rowCount());
+        tableWidget->setItem(tableWidget->rowCount()-1, 0, new QTableWidgetItem("Income"));
+        tableWidget->setItem(tableWidget->rowCount()-1, 1, new QTableWidgetItem({category}));
+        tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem({amount}));
+        tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
 
-    model.ie = "Income";
-    model.category = category;
-    model.amount = money;
-    sqlTable.push_back(model);
+        model.ie = "Income";
+        model.category = category;
+        model.amount = money;
+        sqlTable.push_back(model);
+    }
+    else {
+        QMessageBox::critical(this, "Error", "Category can't be blank");
+    }
+
 }
 
 
 void MainWindow::on_pushButton_2_clicked()
 {
     QString category = categoryIncome->text();
-    QString amount = amountIncome->cleanText();
-    int money = amountIncome->value();
-    sqlAmount -= money;
-    sqlExpenses += money;
-    QString amountString = QString::number(sqlAmount);
-    QString balanceString = QString("Your balance is: %1").arg(amountString);
-    balanceLabel->setText(balanceString);
-    tableWidget->insertRow(tableWidget->rowCount());
-    tableWidget->setItem(tableWidget->rowCount()-1, 0, new QTableWidgetItem("Expenses"));
-    tableWidget->setItem(tableWidget->rowCount()-1, 1, new QTableWidgetItem({category}));
-    tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem({amount}));
-    tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
+    if (category != "") {
 
-    model.ie = "Expenses";
-    model.category = category;
-    model.amount = money;
-    sqlTable.push_back(model);
+        QString amount = amountIncome->cleanText();
+        int money = amountIncome->value();
+        sqlAmount -= money;
+        sqlExpenses += money;
+        QString amountString = QString::number(sqlAmount);
+        QString balanceString = QString("Your balance is: %1").arg(amountString);
+        balanceLabel->setText(balanceString);
+        tableWidget->insertRow(tableWidget->rowCount());
+        tableWidget->setItem(tableWidget->rowCount()-1, 0, new QTableWidgetItem("Expenses"));
+        tableWidget->setItem(tableWidget->rowCount()-1, 1, new QTableWidgetItem({category}));
+        tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem({amount}));
+        tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
+
+        model.ie = "Expenses";
+        model.category = category;
+        model.amount = money;
+        sqlTable.push_back(model);
+    }
+    else {
+        QMessageBox::critical(this, "Error", "Category can't be blank");
+    }
 }
 
 

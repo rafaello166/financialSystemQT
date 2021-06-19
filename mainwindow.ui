@@ -42,17 +42,46 @@
      <height>560</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <widget class="QWidget" name="page1">
     <property name="styleSheet">
      <string notr="true">QPushButton {
 	color :white;
 	background: red;
 	border-radius: 25px;
+    border-radius: 3px;
 }
 
 QPushButton:hover {
 	background: wihte;
 	color: red;
+}
+
+#frame {
+background: rgba(0,0,0,0.8);
+	border-radius: 15px;
+}
+#frame_2 {
+background: rgba(0,0,0,0.7);
+border-radius: 15px;
+}
+
+#label, #label_2, #label_5, #label_6 {
+color: white;
+}
+
+#page1 {
+background: url(:/nowyPrzedrostek/mountains.jpg);
+}
+
+#tableWidget {
+background-color: rgb(200, 200, 200);
+font: 700 9pt &quot;Arial&quot;;
+color:black;
+border-radius: 15px;
+border-bottom: 1px solid #717072;
 }</string>
     </property>
     <widget class="QFrame" name="frame">
@@ -74,7 +103,7 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>310</x>
-        <y>100</y>
+        <y>80</y>
         <width>120</width>
         <height>20</height>
        </rect>
@@ -87,7 +116,7 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>100</y>
+        <y>80</y>
         <width>120</width>
         <height>20</height>
        </rect>
@@ -97,7 +126,7 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>310</x>
-        <y>60</y>
+        <y>40</y>
         <width>120</width>
         <height>20</height>
        </rect>
@@ -110,10 +139,13 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>60</y>
+        <y>40</y>
         <width>47</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Amount:</string>
@@ -123,10 +155,13 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>100</y>
+        <y>80</y>
         <width>51</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Category:</string>
@@ -136,20 +171,35 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>60</y>
+        <y>40</y>
         <width>120</width>
         <height>22</height>
        </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="wrapping">
+       <bool>false</bool>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>150</y>
+        <y>140</y>
         <width>481</width>
         <height>192</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="editTriggers">
        <set>QAbstractItemView::NoEditTriggers</set>
