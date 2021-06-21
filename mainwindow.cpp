@@ -17,8 +17,6 @@ double sqlExpenses = 0;
 sqlTableModel model;
 QVector<sqlTableModel> sqlTable; // = db->getIncomeExpensesData(username);
 
-// Wiadomość powitalna na stronie profilu
-QString sqlWelcomeString = QString("Hi %1! Welcome to your profile.").arg(firstname);
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
@@ -27,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // Ustawienie wiadomości powitalnej w UI
+
+    // Wiadomość powitalna na stronie profilu
+    QString sqlWelcomeString = QString("Hi %1! Welcome to your profile.").arg(firstname);
     welcomeLabel = ui->label_2;
     welcomeLabel->setText(sqlWelcomeString);
 
@@ -153,9 +154,10 @@ void MainWindow::on_pushButton_3_clicked()
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Logout", "Are you sure you want to logout?", QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes) {
-        login *loginPage = new login;
-        hide();
-        loginPage->show();
+        emit logoutClicked();
+//        login *loginPage = new login;
+//        hide();
+//        loginPage->show();
     }
 }
 

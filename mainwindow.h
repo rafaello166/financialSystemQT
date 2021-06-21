@@ -51,6 +51,9 @@ private slots:
 
     // Musimy zainicjować odpowiednie widgety które chcemy później zmieniać za pomocą kodu
 
+signals:
+    void logoutClicked();
+
 private:
     Ui::MainWindow *ui;
     QWidget *mainWindow;

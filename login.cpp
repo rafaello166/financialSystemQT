@@ -4,7 +4,7 @@
 #include <QMessageBox>
 
 // connect to the database
-//databaseConnection* db = new databaseConnection();
+databaseConnection* db = new databaseConnection();
 
 QString firstname = "Maciek";
 
@@ -19,6 +19,7 @@ login::login(QWidget *parent)
     ui->centralstackedWidget->insertWidget(1, &Register);
     ui->centralstackedWidget->insertWidget(2, &Profile);
     connect(&Register, SIGNAL(loginClicked()), this, SLOT(moveLogin()));
+    connect(&Profile, SIGNAL(logoutClicked()), this, SLOT(moveLogin()));
 }
 
 login::~login()
@@ -34,32 +35,34 @@ void login::on_pushButton_login_clicked()
     QString password = ui->lineEdit_password->text();
 
 
-    // logowanie na testowe konto
-    if (username == "test" && password == "pass") {
-        ui->centralstackedWidget->setCurrentIndex(2);
-//        MainWindow *profilePage = new MainWindow;
-//        hide();
-//        profilePage->show();
-    }
+//    // logowanie na testowe konto
+//    if (username == "test" && password == "pass") {
+//        ui->centralstackedWidget->setCurrentIndex(2);
+////        MainWindow *profilePage = new MainWindow;
+////        hide();
+////        profilePage->show();
+//    }
 
 
-//    QMessageBox::information(this, "Login", QString::number(db->getTest()));
+    QMessageBox::information(this, "Login", QString::number(db->getTest()));
 
-//    if(db->isDataCorrect(username) && db->isDataCorrect(password))
-//        if(db->isPasswordCorrect(username, password)) {
-//            QMessageBox::information(this, "Login", "Logged in successfully!");
+    if(db->isDataCorrect(username) && db->isDataCorrect(password))
+        if(db->isPasswordCorrect(username, password)) {
+            QMessageBox::information(this, "Login", "Logged in successfully!");
+
+            ui->centralstackedWidget->setCurrentIndex(2);
 
 //            MainWindow *profilePage = new MainWindow;
 //            hide();
 //            profilePage->show();
-//        }
-//        else {
-//            QMessageBox::warning(this, "Login", "Username or password is incorrect.");
+        }
+        else {
+            QMessageBox::warning(this, "Login", "Username or password is incorrect.");
 
-//            ui->lineEdit_password->setText("");
-//        }
-//    else
-//        QMessageBox::warning(this, "Login", "Username or password is incorrect.");
+            ui->lineEdit_password->setText("");
+        }
+    else
+        QMessageBox::warning(this, "Login", "Username or password is incorrect.");
 
 }
 
