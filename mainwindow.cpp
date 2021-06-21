@@ -12,6 +12,7 @@ double sqlAmount = 0;
 double sqlExpenses = 0;
 
 //databaseConnection* db = new databaseConnection();
+extern databaseConnection* db;
 
 // Stworzenie modelu klasy dzięki której będzie mogli dodawać wpisy do naszego wektora zainicjowanego poniżej
 sqlTableModel model;
@@ -45,28 +46,31 @@ MainWindow::MainWindow(QWidget *parent) :
     tableWidget->setColumnWidth(1, this->width()/3);
     tableWidget->setColumnWidth(2, this->width()/8);
 
-    // testowe dane
-    for(int z = 0; z < 10; z++) {
-        model.ie = "Expenses";
-        model.category = "STATIC";
-        model.amount = 100.01;
-        sqlTable.push_back(model);
-    }
+//    // testowe dane
+//    for(int z = 0; z < 10; z++) {
+//        model.ie = "Expenses";
+//        model.category = "STATIC";
+//        model.amount = 100.01;
+//        sqlTable.push_back(model);
+//    }
+
+    // pobieranie danych z bazy danych
+    QVector<sqlTableModel> sqldata = db->getIncomeExpensesData(firstname);
 
     // wczytanie danych z bazy danych
-    for (int g = 0; g < sqlTable.size(); g++) {
-        QString amount = QString::number(sqlTable[g].amount) + " zł";
+    for (int g = 0; g < sqldata.size(); g++) {
+        QString amount = QString::number(sqldata[g].amount) + " zł";
         tableWidget->insertRow(tableWidget->rowCount());
-        tableWidget->setItem(tableWidget->rowCount()-1, 0, new QTableWidgetItem(sqlTable[g].ie));
-        tableWidget->setItem(tableWidget->rowCount()-1, 1, new QTableWidgetItem(sqlTable[g].category));
+        tableWidget->setItem(tableWidget->rowCount()-1, 0, new QTableWidgetItem(QVariant(sqldata[g].ie).toBool() ? "Income" : "Expenses"));
+        tableWidget->setItem(tableWidget->rowCount()-1, 1, new QTableWidgetItem(sqldata[g].category));
         tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem(amount));
         tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
-        if (sqlTable[g].ie == "Income") {
-            sqlAmount += sqlTable[g].amount;
+        if (!QVariant(sqldata[g].ie).toBool()) { // Income
+            sqlAmount += sqldata[g].amount;
         }
-        else if (sqlTable[g].ie == "Expenses") {
-            sqlAmount -= sqlTable[g].amount;
-            sqlExpenses += sqlTable[g].amount;
+        else if (QVariant(sqldata[g].ie).toBool()) { // Expenses
+            sqlAmount -= sqldata[g].amount;
+            sqlExpenses += sqldata[g].amount;
         }
     }
 
@@ -100,10 +104,12 @@ void MainWindow::on_pushButton_clicked()
         tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
 
         // Wykorzystanie na początku stworzonego modelu do dowania wpisów do wektora (sqlTable)
-        model.ie = "Income";
-        model.category = category;
-        model.amount = money;
-        sqlTable.push_back(model);
+//        model.ie = "Income";
+//        model.category = category;
+//        model.amount = money;
+//        sqlTable.push_back(model);
+
+        db->addIncomeExpenses(firstname, 0, category, money);
     }
     // Pole kategorii nie może być puste
     else if (category == "") {
@@ -134,10 +140,12 @@ void MainWindow::on_pushButton_2_clicked()
         tableWidget->setItem(tableWidget->rowCount()-1, 2, new QTableWidgetItem({amount}));
         tableWidget->setCurrentCell(tableWidget->rowCount()-1, 0);
 
-        model.ie = "Expenses";
-        model.category = category;
-        model.amount = money;
-        sqlTable.push_back(model);
+//        model.ie = "Expenses";
+//        model.category = category;
+//        model.amount = money;
+//        sqlTable.push_back(model);
+
+        db->addIncomeExpenses(firstname, 1, category, money);
     }
     else if (category == "") {
         QMessageBox::critical(this, "Error", "Category can't be blank");
@@ -179,6 +187,7 @@ void MainWindow::on_pushButton_4_clicked()
                 sqlAmount += amount;
                 sqlExpenses -= amount;
             }
+
         }
         if (count == 1) {
             sqlAmount = 0;
@@ -187,8 +196,19 @@ void MainWindow::on_pushButton_4_clicked()
         QString amountString = QString::number(sqlAmount) + " zł";
         QString balanceString = QString("Your balance is: %1").arg(amountString);
         balanceLabel->setText(balanceString);
+
+
+        // pobieranie danych z bazy danych
+        QVector<sqlTableModel> sqldata = db->getIncomeExpensesData(firstname);
+
+        // usuwanie z bazy danych
+        int removeAtSql = sqldata[row].id;
+        db->removeRow(firstname, removeAtSql);
+
+        // usuwanie z ekranu widoku
         tableWidget->removeRow(row);
-        sqlTable.removeAt(row);
+        sqldata.removeAt(row);
+
     }
     // Jeżeli nie ma żadnych wpisów w tabeli to nie możemy nic odjąć
     else {
@@ -196,7 +216,7 @@ void MainWindow::on_pushButton_4_clicked()
     }
 }
 
-// Logika klikania przycisku do dodawania dochodów
+// Logika klikania przycisku do czyszczenia danych
 void MainWindow::on_pushButton_5_clicked()
 {
     int count = tableWidget->rowCount();
@@ -215,6 +235,15 @@ void MainWindow::on_pushButton_5_clicked()
             balanceLabel->setText(balanceString);
             tableWidget->setRowCount(0);
             sqlTable.clear();
+
+
+            // pobieranie danych z bazy danych
+            QVector<sqlTableModel> sqldata = db->getIncomeExpensesData(firstname);
+
+            // usuwanie z bazy danych wszystkich kolumn
+            for (int g = 0; g < sqldata.size(); g++)
+                db->removeRow(firstname, sqldata[g].id);
+
         }
     }
 }
@@ -227,15 +256,18 @@ PieChart::PieChart(QWidget *parent) :
     ui->setupUi(this);
     QPieSeries *series = new QPieSeries();
 
+    // pobieranie danych z bazy danych
+    QVector<sqlTableModel> sqldata = db->getIncomeExpensesData(firstname);
+
     // Ustawiamy nasz wykres by wyglądał jak donut
     series->setHoleSize(0.35);
 
     // Dodajemy do naszego wykresu dane z tabeli
-    for (int i = 0; i < sqlTable.size(); i++) {
-        if (sqlTable[i].ie == "Expenses") {
+    for (int i = 0; i < sqldata.size(); i++) {
+        if (QVariant(sqldata[i].ie).toBool()) { // Expenses
             // Jeżeli nie ma żadnego wpisu zapisanego na naszym wykresie to po prostu dodaje ten wpis
             if (series->count() == 0) {
-                series->append(sqlTable[i].category, sqlTable[i].amount)->setLabelVisible();
+                series->append(sqldata[i].category, sqldata[i].amount)->setLabelVisible();
             }
             // Natomiast jeśli już jakieś są to sprawdza wszystkie czy nie istnieje już wpis o takiej samej kategorii
             // Jeśli istnieje to do zapisanego już wpisu dodaje wartość tego drugie wpisu przez co ten pierwszy się powiększa
@@ -243,13 +275,13 @@ PieChart::PieChart(QWidget *parent) :
             else {
                 int j = 0;
                 while (true) {
-                    if (series->slices().at(j)->label() == sqlTable[i].category) {
-                        double newVal = series->slices().at(j)->value() + sqlTable[i].amount;
+                    if (series->slices().at(j)->label() == sqldata[i].category) {
+                        double newVal = series->slices().at(j)->value() + sqldata[i].amount;
                         series->slices().at(j)->setValue(newVal);
                         break;
                     }
                     if (j == series->count() - 1) {
-                        series->append(sqlTable[i].category, sqlTable[i].amount)->setLabelVisible();
+                        series->append(sqldata[i].category, sqldata[i].amount)->setLabelVisible();
                         break;
                     }
                     j++;

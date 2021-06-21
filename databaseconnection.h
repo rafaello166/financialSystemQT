@@ -17,6 +17,7 @@ extern QString firstname;
 
 class sqlTableModel {
 public:
+    int id;
     QString ie;
     QString category;
     double amount;
@@ -38,8 +39,8 @@ public:
     bool isUsernameArleadyTaken(QString username);
     bool isPasswordCorrect(QString username, QString password);
     bool isDataCorrect(QString field);
-    void setTest();
-    int getTest();
+    void addIncomeExpenses(QString username, bool income_expenses, QString Category, double amount);
+    void removeRow(QString username, int row);
 
 // Zainicjowanie zmiennej db która będzie służyła nam jako odwołanie do naszej bazy danych
 private:

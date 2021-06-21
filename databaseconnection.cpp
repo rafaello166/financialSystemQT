@@ -88,39 +88,52 @@ bool databaseConnection::isDataCorrect(QString field) {
     return false;
 }
 
-void databaseConnection::setTest(){
-    test = test + 1;
-}
-
-int databaseConnection::getTest() {
-    setTest();
-    return test;
-}
-
 QVector<sqlTableModel> databaseConnection::getIncomeExpensesData(QString username) {
     QSqlQuery *query = new QSqlQuery(db);
 
     int i = 0;
-    int query_size;
-    if( query->exec("SELECT income_expenses, category, amount FROM expenses WHERE username='"+username+"' ") ) {
-        query_size = query->size();
+    if( query->exec("SELECT Lp, income_expenses, category, amount FROM expenses WHERE username='"+username+"' ") ) {
         QVector<sqlTableModel> data;
 
         while( query->next() ) {
 
             sqlTableModel model;
-            model.ie = query->value(0).toString();
-            model.category = query->value(1).toString();
-            model.amount = query->value(2).toDouble();
+            model.id = query->value(0).toInt();
+            model.ie = query->value(1).toString();
+            model.category = query->value(2).toString();
+            model.amount = query->value(3).toDouble();
             data.push_back(model);
 
             i++;
         }
 
-//        return data[query_size][3];
         return data;
     }
 
-//    return "";
 }
 
+void databaseConnection::addIncomeExpenses(QString username, bool income_expenses, QString category, double amount) {
+    QSqlQuery *query = new QSqlQuery(db);
+
+
+    query->prepare("INSERT INTO expenses (username, income_expenses, category, amount) "
+         "VALUES (?, ?, ?, ?)");
+
+    query->addBindValue(username);
+    query->addBindValue(income_expenses);
+    query->addBindValue(category);
+    query->addBindValue(amount);
+    query->exec();
+
+    delete query;
+}
+
+void databaseConnection::removeRow(QString username, int row) {
+    QSqlQuery *query = new QSqlQuery(db);
+
+    QString number = QString::number(row);
+    query->prepare("DELETE FROM expenses WHERE username='"+username+"' and Lp='"+number+"' ");
+    query->exec();
+
+    delete query;
+}

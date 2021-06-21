@@ -6,7 +6,7 @@
 // connect to the database
 databaseConnection* db = new databaseConnection();
 
-QString firstname = "Maciek";
+QString firstname = "test";
 
 login::login(QWidget *parent)
     : QWidget(parent)
@@ -43,8 +43,6 @@ void login::on_pushButton_login_clicked()
 ////        profilePage->show();
 //    }
 
-
-    QMessageBox::information(this, "Login", QString::number(db->getTest()));
 
     if(db->isDataCorrect(username) && db->isDataCorrect(password))
         if(db->isPasswordCorrect(username, password)) {
